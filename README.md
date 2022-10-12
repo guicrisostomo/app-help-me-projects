@@ -1,6 +1,6 @@
-# app_help_me
+# App to help me with my porjects
 
-A new Flutter project.
+App created with the goal of add my projects more easily.
 
 ## Getting Started
 
