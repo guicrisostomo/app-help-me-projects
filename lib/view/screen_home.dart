@@ -17,13 +17,11 @@ class _ScreenHomeState extends State<ScreenHome> {
         child: Column(
           children: [
             ListViewProjects(),
-            bottomNavigation()
-            
           ],
         )
       ),
 
-      
+      bottomNavigationBar: bottomNavigation()
     );
   }
 }

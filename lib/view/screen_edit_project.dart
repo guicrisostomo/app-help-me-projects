@@ -49,12 +49,12 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
               const SizedBox(height: 10,),
 
               button('Salvar', context, 'home'),
-
-              bottomNavigation(),
             ],
           ),
         ),
       ),
+
+      bottomNavigationBar: bottomNavigation()
     );
   }
 }
