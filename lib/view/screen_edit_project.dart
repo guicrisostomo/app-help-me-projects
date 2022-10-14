@@ -20,10 +20,13 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
         backgroundColor: Colors.black,
       ),
 
-      body: Column(
-        children: [
-          TextFieldGeneral('Nome português', txtNomePT, context),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            TextFieldGeneral('Nome português', txtNomePT, context),
+          ],
+        ),
       ),
     );
   }
