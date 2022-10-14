@@ -31,6 +31,14 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
     txtLink.text = p['link'];
     txtLinkImage.text = p['linkImage'];
 
+    for (var skill in p['skills']) {
+      if (txtSkills.text != '') {
+        txtSkills.text = '${txtSkills.text},$skill';
+      } else {
+        txtSkills.text = '$skill';
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Editar projeto'),
