@@ -1,13 +1,10 @@
 // ignore_for_file: file_names
 
-import 'package:app_help_me/data/listProjects.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('projects').snapshots();
-
-List<Projects> lista = [];
 
 ListViewProjects() {
   return StreamBuilder<QuerySnapshot>(

@@ -1,6 +1,7 @@
 import 'package:app_help_me/model/bottomNavigationBar.dart';
 import 'package:app_help_me/model/button.dart';
 import 'package:app_help_me/model/textField.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ScreenEditProject extends StatefulWidget {
@@ -18,9 +19,18 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
   var txtLink = TextEditingController();
   var txtLinkImage = TextEditingController();
   var txtSkills = TextEditingController();
-
+  
   @override
   Widget build(BuildContext context) {
+    var p = ModalRoute.of(context)!.settings.arguments as QueryDocumentSnapshot;
+  
+    txtNomePT.text = p['nomePT'];
+    txtNomeEN.text = p['nomeEN'];
+    txtDescricaoPT.text = p['descricaoPT'];
+    txtDescricaoEN.text = p['descricaoEN'];
+    txtLink.text = p['link'];
+    txtLinkImage.text = p['linkImage'];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Editar projeto'),
