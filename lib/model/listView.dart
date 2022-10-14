@@ -1,43 +1,50 @@
 // ignore_for_file: file_names
 
+import 'package:app_help_me/data/listProjects.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('projects').snapshots();
 
+List<Projects> lista = [];
+
 ListViewProjects() {
   return StreamBuilder<QuerySnapshot>(
-      stream: _usersStream,
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Text('Something went wrong');
-        }
+    stream: _usersStream,
+    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+      if (snapshot.hasError) {
+        return Text('Something went wrong');
+      }
 
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Expanded(child: Center(child: CircularProgressIndicator()));
-        }
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Expanded(child: Center(child: CircularProgressIndicator()));
+      }
 
-        return ListView(
-          shrinkWrap: true,
-          children: snapshot.data!.docs.map((DocumentSnapshot document) {
-          Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-            return ListTile(
-              title: Text(data['nomePT']),
-              subtitle: Text(data['descricaoPT']),
-              trailing: (
-                IconButton(
-                  icon: const Icon(Icons.edit),
-                  onPressed: () {
-                    Navigator.pushNamed(
-                      context,
-                      'edit_project',
-                    );
-                  },
-                )
+      return ListView.builder(
+        itemCount: snapshot.data?.size,
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+        
+          return ListTile(
+            title: Text(snapshot.data!.docs[index]['nomePT']),
+            subtitle: Text(snapshot.data!.docs[index]['descricaoPT']),
+            trailing: (
+              IconButton(
+                icon: const Icon(Icons.edit),
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    'edit_project',
+
+                    arguments: snapshot.data!.docs[index],
+                  );
+                },
               )
-            );
-          }).toList(),
-        );
-      },
-    );
+            )
+          );
+        }
+      );
+    },
+  );
 }
