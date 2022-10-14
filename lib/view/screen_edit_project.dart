@@ -1,3 +1,4 @@
+import 'package:app_help_me/model/bottomNavigationBar.dart';
 import 'package:app_help_me/model/button.dart';
 import 'package:app_help_me/model/textField.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,9 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
 
               const SizedBox(height: 10,),
 
-              button('Salvar', context, 'home')
+              button('Salvar', context, 'home'),
+
+              bottomNavigation(),
             ],
           ),
         ),

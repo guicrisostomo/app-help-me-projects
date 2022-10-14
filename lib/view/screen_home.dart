@@ -1,3 +1,4 @@
+import 'package:app_help_me/model/bottomNavigationBar.dart';
 import 'package:app_help_me/model/listView.dart';
 import 'package:flutter/material.dart';
 
@@ -16,9 +17,13 @@ class _ScreenHomeState extends State<ScreenHome> {
         child: Column(
           children: [
             ListViewProjects(),
+            bottomNavigation()
+            
           ],
         )
       ),
+
+      
     );
   }
 }
