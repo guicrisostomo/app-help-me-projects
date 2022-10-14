@@ -1,4 +1,4 @@
-# App to help me with my porjects
+# App to help me with my projects
 
 App created with the goal of add my projects more easily.
 
