@@ -21,7 +21,7 @@ class _ScreenHomeState extends State<ScreenHome> {
         )
       ),
 
-      bottomNavigationBar: bottomNavigation()
+      bottomNavigationBar: bottomNavigation(context)
     );
   }
 }

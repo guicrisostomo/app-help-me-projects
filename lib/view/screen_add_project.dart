@@ -55,7 +55,7 @@ class _ScreenAddProjectState extends State<ScreenAddProject> {
         ),
       ),
 
-      bottomNavigationBar: bottomNavigation()
+      bottomNavigationBar: bottomNavigation(context)
     );
   }
 }

@@ -54,7 +54,7 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
         ),
       ),
 
-      bottomNavigationBar: bottomNavigation()
+      bottomNavigationBar: bottomNavigation(context)
     );
   }
 }
