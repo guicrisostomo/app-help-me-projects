@@ -1,44 +1,46 @@
-// ignore_for_file: file_names
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Projects {
+  final String? nome;
+  final String? descricaoPT;
+  final String? descricaoEN;
+  final String? link;
+  final String? linkImage;
+  final List<String>? skills;
+
   Projects({
-    required this.nome,
-    required this.descricaoPT,
-    required this.descricaoEN,
-    required this.link,
-    required this.linkImage,
-    required this.order,
-    required this.skills,
+    this.nome,
+    this.descricaoPT,
+    this.descricaoEN,
+    this.link,
+    this.linkImage,
+    this.skills,
   });
 
-  Projects.fromJson(Map<String, Object?> json)
-      : this(
-          nome: json['nome']! as String,
-          descricaoPT: json['descricaoPT']! as String,
-          descricaoEN: json['descricaoEN']! as String,
-          link: json['link']! as String,
-          linkImage: json['linkImage']! as String,
-          order: json['order']! as int,
-          skills: (json['skills']! as List).cast<String>(),
-        );
+  factory Projects.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
+    final data = snapshot.data();
+    return Projects(
+      nome: data?['nome'],
+      descricaoPT: data?['descricaoPT'],
+      descricaoEN: data?['descricaoEN'],
+      link: data?['link'],
+      linkImage: data?['linkImage'],
+      skills:
+          data?['skills'] is Iterable ? List.from(data?['skills']) : null,
+    );
+  }
 
-  final String nome;
-  final String descricaoPT;
-  final String descricaoEN;
-  final String link;
-  final String linkImage;
-  final int order;
-  final List<String> skills;
-
-  Map<String, Object?> toJson() {
+  Map<String, dynamic> toFirestore() {
     return {
-      'nome': nome,
-      'descricaoPT': descricaoPT,
-      'descricaoEN': descricaoEN,
-      'link': link,
-      'linkImage': linkImage,
-      'order': order,
-      'skills': skills,
+      if (nome != null) "nome": nome,
+      if (descricaoPT != null) "descricaoPT": descricaoPT,
+      if (descricaoEN != null) "descricaoEN": descricaoEN,
+      if (link != null) "link": link,
+      if (linkImage != null) "linkImage": linkImage,
+      if (skills != null) "skills": skills,
     };
   }
 }
