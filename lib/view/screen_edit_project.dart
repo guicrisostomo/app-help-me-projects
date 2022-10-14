@@ -10,6 +10,12 @@ class ScreenEditProject extends StatefulWidget {
 
 class _ScreenEditProjectState extends State<ScreenEditProject> {
   var txtNomePT = TextEditingController();
+  var txtNomeEN = TextEditingController();
+  var txtDescricaoPT = TextEditingController();
+  var txtDescricaoEN = TextEditingController();
+  var txtLink = TextEditingController();
+  var txtLinkImage = TextEditingController();
+  var txtSkills = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +26,20 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
         backgroundColor: Colors.black,
       ),
 
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            TextFieldGeneral('Nome português', txtNomePT, context),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              TextFieldGeneral('Nome português', txtNomePT, context),
+              TextFieldGeneral('Nome inglês', txtNomeEN, context),
+              TextFieldGeneral('Descrição português', txtDescricaoPT, context),
+              TextFieldGeneral('Descrição português', txtDescricaoEN, context),
+              TextFieldGeneral('Link', txtLink, context),
+              TextFieldGeneral('Link image', txtLinkImage, context),
+              TextFieldGeneral('Skills', txtSkills, context),
+            ],
+          ),
         ),
       ),
     );
