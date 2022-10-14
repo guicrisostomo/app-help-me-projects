@@ -1,3 +1,4 @@
+import 'package:app_help_me/model/button.dart';
 import 'package:app_help_me/model/textField.dart';
 import 'package:flutter/material.dart';
 
@@ -32,12 +33,21 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
           child: Column(
             children: [
               TextFieldGeneral('Nome português', txtNomePT, context),
+              const SizedBox(height: 5,),
               TextFieldGeneral('Nome inglês', txtNomeEN, context),
+              const SizedBox(height: 5,),
               TextFieldGeneral('Descrição português', txtDescricaoPT, context),
+              const SizedBox(height: 5,),
               TextFieldGeneral('Descrição português', txtDescricaoEN, context),
               TextFieldGeneral('Link', txtLink, context),
+              const SizedBox(height: 5,),
               TextFieldGeneral('Link image', txtLinkImage, context),
+              const SizedBox(height: 5,),
               TextFieldGeneral('Skills', txtSkills, context),
+
+              const SizedBox(height: 10,),
+
+              button('Salvar', context, 'home')
             ],
           ),
         ),
