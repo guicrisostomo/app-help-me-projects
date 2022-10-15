@@ -2,20 +2,14 @@
 
 import 'package:flutter/material.dart';
 
-class TextFieldSkills extends StatefulWidget {
+class TextFieldSkills extends StatelessWidget {
+  
   final String rotulo;
   final TextEditingController variavel;
   final ValueChanged<String> onChanged;
-  List<String> skillList = [];
-
-  TextFieldSkills({super.key, required this.rotulo, required this.variavel, required this.onChanged, this.skillList = const []});
-
-  @override
-  State<TextFieldSkills> createState() => _TextFieldSkillsState();
   
-}
+  const TextFieldSkills({super.key, required this.rotulo, required this.variavel, required this.onChanged});
 
-class _TextFieldSkillsState extends State<TextFieldSkills> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,7 +22,7 @@ class _TextFieldSkillsState extends State<TextFieldSkills> {
 
       child: Center(
         child: TextFormField(
-          controller: widget.variavel,
+          controller: variavel,
 
           style: const TextStyle(
             fontSize: 24,
@@ -36,7 +30,7 @@ class _TextFieldSkillsState extends State<TextFieldSkills> {
           ),
 
           decoration: InputDecoration(
-            labelText: widget.rotulo,
+            labelText: rotulo,
             labelStyle: const TextStyle(
               fontSize: 24,
               color: Colors.black,
@@ -48,7 +42,7 @@ class _TextFieldSkillsState extends State<TextFieldSkills> {
             ),
           ),
           
-          onChanged: widget.onChanged,
+          onChanged: onChanged,
           //
           // VALIDAÇÃO
           //

@@ -1,4 +1,3 @@
-import 'package:app_help_me/model/bottomNavigationBar.dart';
 import 'package:app_help_me/model/button.dart';
 import 'package:app_help_me/model/textField.dart';
 import 'package:app_help_me/model/textFieldSkills.dart';
@@ -22,27 +21,14 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
   var txtLinkImage = TextEditingController();
   var txtSkills = TextEditingController();
   var flagPassArgumentsText = 0;
-  Future<List<String>> listSkill = Future((() => []));
+  List<String> listSkill = [];
 
   @override
   void initState() {
     super.initState();
     txtSkills.text = '';
     flagPassArgumentsText = 0;
-    listSkill = updateAndGetList('');
-  }
-
-  void refreshList(value) {
-    // reload
-    setState(() {
-      txtSkills.text = '';
-      listSkill = updateAndGetList(txtSkills.text);
-    });
-  }
-
-  Future<List<String>> updateAndGetList(value) async {
-    // return the list here
-    return txtSkills.text.split(',');
+    listSkill = [];
   }
 
   passArgumentsText(context) {
@@ -55,15 +41,17 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
         if (txtSkills.text != '') {
           setState(() { 
             txtSkills.text = '${txtSkills.text},$skill';
-            listSkill = updateAndGetList(txtSkills.text);
           });
         } else {
           setState(() { 
             txtSkills.text = '$skill';
-            listSkill = updateAndGetList(txtSkills.text);
           });
         }
       }
+
+      setState(() {
+        listSkill = txtSkills.text.split(',');
+      });
 
       txtNomePT.text = p['nomePT'];
       txtNomeEN.text = p['nomeEN'];
@@ -106,59 +94,45 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
               TextFieldSkills(rotulo: 'Skills', variavel: txtSkills, onChanged:(value) {
                 setState(() {
                   txtSkills.text = value;
-                  listSkill = updateAndGetList(txtSkills.text);
+                  listSkill = value.split(',');
                 });
                 txtSkills.selection = TextSelection.fromPosition(TextPosition(offset: value.length));
               },),
 
-              FutureBuilder<List<String>>(
-                future: listSkill,
-  builder: (context, AsyncSnapshot<List<String>> snapshot){
-  if(!snapshot.hasData) {
-    return const Text('Vazio');
-  } else {
-    final items = snapshot.data ?? <String>[];
+              if(listSkill.isNotEmpty)
+                ListView.builder(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: listSkill.length,
+                  itemBuilder: (context, index){
+                    return Card(
+                      child:ListTile(
+                        leading: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: SvgPicture.network(listSkill[index], height: 50, width: 50,)
+                        ),
+                        title: Text(listSkill[index]),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () {
+                            setState(() {
+                              listSkill.removeAt(index);
+                              txtSkills.text = '';
 
-     return ListView.builder(
-      physics: const AlwaysScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: items.length,
-      itemBuilder: (context, index){
-      return Card(
-        child:ListTile(
-          leading: Padding(
-            padding: const EdgeInsets.all(10),
-            child: SvgPicture.network(items[index], height: 50, width: 50,)
-          ),
-          title: Text(items[index]),
-          trailing: IconButton(
-            icon: const Icon(Icons.delete),
-            onPressed: () {
-              items.removeAt(index);
-              setState(() {
-                txtSkills.text = '';
-
-                for (var skill in items) {
-                  if (txtSkills.text != '') {
-                      txtSkills.text = '${txtSkills.text},$skill';
-                  } else {
-                      txtSkills.text = '$skill';
-                      listSkill = updateAndGetList(txtSkills.text);
+                              for (var skill in listSkill) {
+                                if (txtSkills.text != '') {
+                                    txtSkills.text = '${txtSkills.text},$skill';
+                                } else {
+                                    txtSkills.text = skill;
+                                }
+                              }
+                            });
+                          },
+                        ),
+                      )
+                    );
                   }
-                }
-
-                listSkill = updateAndGetList(txtSkills.text);
-              });
-            },
-          ),
-        )
-      ); // Your widget Here ; // Put your widget, such as container, decoratedBox, listTiles, button etc
-      
-      },
-     );
-   }
-  }
-),
+                ),
               
 
               const SizedBox(height: 10,),

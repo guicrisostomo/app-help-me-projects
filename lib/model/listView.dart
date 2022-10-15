@@ -2,16 +2,16 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('projects').snapshots();
 
-ListViewProjects() {
+// ignore: non_constant_identifier_names
+Widget ListViewProjects() {
   return StreamBuilder<QuerySnapshot>(
     stream: _usersStream,
     builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
       if (snapshot.hasError) {
-        return Text('Something went wrong');
+        return const Text('Something went wrong');
       }
 
       if (snapshot.connectionState == ConnectionState.waiting) {
