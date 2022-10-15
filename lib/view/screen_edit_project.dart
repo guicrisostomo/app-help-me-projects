@@ -137,7 +137,7 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
 
               const SizedBox(height: 10,),
 
-              button('Salvar', context, 'home'),
+              button('Salvar', context, 'home', 'Edit'),
             ],
           ),
         ),

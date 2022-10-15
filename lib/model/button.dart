@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-button(text, context, screen) {
+button(text, context, screen, buttonClick) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(100, 50), 
@@ -16,6 +16,12 @@ button(text, context, screen) {
 
       //COMPORTAMENTO
       onPressed: () {
+        if (buttonClick == 'Edit') {
+          
+        } else {
+
+        }
+
         Navigator.of(context).pop();
         Navigator.pushNamed(
           context,

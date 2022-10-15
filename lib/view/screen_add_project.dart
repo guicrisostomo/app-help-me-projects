@@ -48,7 +48,7 @@ class _ScreenAddProjectState extends State<ScreenAddProject> {
 
               const SizedBox(height: 10,),
 
-              button('Adicionar', context, 'home')
+              button('Adicionar', context, 'home', 'Save')
             ],
           ),
         ),
