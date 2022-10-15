@@ -139,7 +139,7 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
 
               const SizedBox(height: 10,),
 
-              buttonUpdate('Salvar', context, 'home', 'Edit', p.id),
+              buttonUpdate('Salvar', context, 'home', p.id),
             ],
           ),
         ),
@@ -147,7 +147,7 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
     );
   }
 
-  buttonUpdate(text, context, screen, buttonClick, id) {
+  buttonUpdate(text, context, screen, id) {
 
   CollectionReference projects = FirebaseFirestore.instance.collection('projects');
 
@@ -172,11 +172,7 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
 
       //COMPORTAMENTO
       onPressed: () {
-        if (buttonClick == 'Edit') {
-          updateProject();
-        } else {
-
-        }
+        updateProject();
 
         Navigator.of(context).pop();
         Navigator.pushNamed(
