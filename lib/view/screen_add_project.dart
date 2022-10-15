@@ -118,7 +118,7 @@ class _ScreenAddProjectState extends State<ScreenAddProject> {
 
     Future<void> AddProject() {
       return projects
-        .add({'nomePT': txtNomePT.text, 'nomeEN': txtNomeEN.text, 'descricaoPT': txtDescricaoPT.text, 'descricaoEN': txtDescricaoEN.text, 'link': txtLink.text, 'linkImage': txtLinkImage.text, 'order': txtOrder.text, 'skills': listSkill});
+        .add({'nomePT': txtNomePT.text, 'nomeEN': txtNomeEN.text, 'descricaoPT': txtDescricaoPT.text, 'descricaoEN': txtDescricaoEN.text, 'link': txtLink.text, 'linkImage': txtLinkImage.text, 'order': int.parse(txtOrder.text), 'skills': listSkill});
     }
 
     return ElevatedButton(

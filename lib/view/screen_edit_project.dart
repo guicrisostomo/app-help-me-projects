@@ -158,7 +158,7 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
   Future<void> updateProject() {
     return projects
       .doc(id)
-      .update({'nomePT': txtNomePT.text, 'nomeEN': txtNomeEN.text, 'descricaoPT': txtDescricaoPT.text, 'descricaoEN': txtDescricaoEN.text, 'link': txtLink.text, 'linkImage': txtLinkImage.text, 'order': txtOrder.text, 'skills': listSkill});
+      .update({'nomePT': txtNomePT.text, 'nomeEN': txtNomeEN.text, 'descricaoPT': txtDescricaoPT.text, 'descricaoEN': txtDescricaoEN.text, 'link': txtLink.text, 'linkImage': txtLinkImage.text, 'order': int.parse(txtOrder.text), 'skills': listSkill});
   }
 
     return ElevatedButton(
