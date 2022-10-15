@@ -1,6 +1,7 @@
 import 'package:app_help_me/model/bottomNavigationBar.dart';
 import 'package:app_help_me/model/button.dart';
 import 'package:app_help_me/model/textField.dart';
+import 'package:app_help_me/model/textFieldSkills.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -19,25 +20,64 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
   var txtLink = TextEditingController();
   var txtLinkImage = TextEditingController();
   var txtSkills = TextEditingController();
-  
+  var flagPassArgumentsText = 0;
+  Future<List<String>> listSkill = Future((() => []));
+
+  @override
+  void initState() {
+    super.initState();
+    txtSkills.text = '';
+    flagPassArgumentsText = 0;
+    listSkill = updateAndGetList('');
+  }
+
+  void refreshList(value) {
+    // reload
+    setState(() {
+      txtSkills.text = '';
+      listSkill = updateAndGetList(txtSkills.text);
+    });
+  }
+
+  Future<List<String>> updateAndGetList(value) async {
+    // return the list here
+    return txtSkills.text.split(',');
+  }
+
+  passArgumentsText(context) {
+    if (flagPassArgumentsText == 0) {
+      setState(() => flagPassArgumentsText = 1);
+
+      var p = ModalRoute.of(context)!.settings.arguments as QueryDocumentSnapshot;
+    
+      for (var skill in p['skills']) {
+        if (txtSkills.text != '') {
+          setState(() { 
+            txtSkills.text = '${txtSkills.text},$skill';
+            listSkill = updateAndGetList(txtSkills.text);
+          });
+        } else {
+          setState(() { 
+            txtSkills.text = '$skill';
+            listSkill = updateAndGetList(txtSkills.text);
+          });
+        }
+      }
+
+      txtNomePT.text = p['nomePT'];
+      txtNomeEN.text = p['nomeEN'];
+      txtDescricaoPT.text = p['descricaoPT'];
+      txtDescricaoEN.text = p['descricaoEN'];
+      txtLink.text = p['link'];
+      txtLinkImage.text = p['linkImage'];
+
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    var p = ModalRoute.of(context)!.settings.arguments as QueryDocumentSnapshot;
-  
-    txtNomePT.text = p['nomePT'];
-    txtNomeEN.text = p['nomeEN'];
-    txtDescricaoPT.text = p['descricaoPT'];
-    txtDescricaoEN.text = p['descricaoEN'];
-    txtLink.text = p['link'];
-    txtLinkImage.text = p['linkImage'];
 
-    for (var skill in p['skills']) {
-      if (txtSkills.text != '') {
-        txtSkills.text = '${txtSkills.text},$skill';
-      } else {
-        txtSkills.text = '$skill';
-      }
-    }
+    passArgumentsText(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -62,7 +102,38 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
               const SizedBox(height: 5,),
               TextFieldGeneral('Link image', txtLinkImage, context),
               const SizedBox(height: 5,),
-              TextFieldGeneral('Skills', txtSkills, context),
+              TextFieldSkills(rotulo: 'Skills', variavel: txtSkills, onChanged:(value) {
+                setState(() {
+                  txtSkills.text = value;
+                  listSkill = updateAndGetList(txtSkills.text);
+                });
+                txtSkills.selection = TextSelection.fromPosition(TextPosition(offset: value.length));
+              },),
+
+              FutureBuilder<List<String>>(
+                future: listSkill,
+  builder: (context, AsyncSnapshot<List<String>> snapshot){
+  if(!snapshot.hasData)return Container(child: Text('sdfds')); // Display empty container if the list is empty
+  else {
+    final items = snapshot.data ?? <String>[];
+
+     return ListView.builder(
+      physics: const AlwaysScrollableScrollPhysics(), //Even if zero elements to update scroll
+      shrinkWrap: true,
+      itemCount: items.length,
+      itemBuilder: (context, index){
+      return Card(
+        child:ListTile(
+          title: Text(items[index])
+        )
+      ); // Your widget Here ; // Put your widget, such as container, decoratedBox, listTiles, button etc
+      
+      },
+     );
+   }
+  }
+),
+              
 
               const SizedBox(height: 10,),
 
