@@ -113,8 +113,9 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
               FutureBuilder<List<String>>(
                 future: listSkill,
   builder: (context, AsyncSnapshot<List<String>> snapshot){
-  if(!snapshot.hasData)return Container(child: Text('sdfds')); // Display empty container if the list is empty
-  else {
+  if(!snapshot.hasData) {
+    return const Text('Vazio');
+  } else {
     final items = snapshot.data ?? <String>[];
 
      return ListView.builder(
