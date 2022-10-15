@@ -68,6 +68,8 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
 
     passArgumentsText(context);
 
+    var p = ModalRoute.of(context)!.settings.arguments as QueryDocumentSnapshot;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Editar projeto'),
@@ -137,11 +139,53 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
 
               const SizedBox(height: 10,),
 
-              button('Salvar', context, 'home', 'Edit'),
+              buttonUpdate('Salvar', context, 'home', 'Edit', p.id),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  buttonUpdate(text, context, screen, buttonClick, id) {
+
+  CollectionReference projects = FirebaseFirestore.instance.collection('projects');
+
+  Future<void> updateProject() {
+    return projects
+      .doc(id)
+      .update({'nomePT': txtNomePT.text, 'nomeEN': txtNomeEN.text, 'descricaoPT': txtDescricaoPT.text, 'descricaoEN': txtDescricaoEN.text, 'link': txtLink.text, 'linkImage': txtLinkImage.text, 'skills': listSkill})
+      .then((value) => print("User Updated"))
+      .catchError((error) => print("Failed to update user: $error"));
+  }
+
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(100, 50), 
+        backgroundColor: const Color.fromRGBO(50, 62, 64, 1),
+      ),
+      
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontSize: 24,
+        )
+      ),
+
+      //COMPORTAMENTO
+      onPressed: () {
+        if (buttonClick == 'Edit') {
+          updateProject();
+        } else {
+
+        }
+
+        Navigator.of(context).pop();
+        Navigator.pushNamed(
+          context,
+          screen,
+        );
+      },
     );
   }
 }
