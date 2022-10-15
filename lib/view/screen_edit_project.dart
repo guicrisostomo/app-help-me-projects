@@ -88,7 +88,7 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
               const SizedBox(height: 5,),
               TextFieldGeneral('Descrição português', txtDescricaoPT, context),
               const SizedBox(height: 5,),
-              TextFieldGeneral('Descrição português', txtDescricaoEN, context),
+              TextFieldGeneral('Descrição inglês', txtDescricaoEN, context),
               TextFieldGeneral('Link', txtLink, context),
               const SizedBox(height: 5,),
               TextFieldGeneral('Link image', txtLinkImage, context),
