@@ -60,7 +60,7 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
       txtDescricaoEN.text = p['descricaoEN'];
       txtLink.text = p['link'];
       txtLinkImage.text = p['linkImage'];
-      txtOrder.text = p['order'];
+      txtOrder.text = p['order'].toString();
 
     }
   }
