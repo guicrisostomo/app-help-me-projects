@@ -4,6 +4,7 @@ import 'package:app_help_me/model/textField.dart';
 import 'package:app_help_me/model/textFieldSkills.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ScreenEditProject extends StatefulWidget {
   const ScreenEditProject({super.key});
@@ -119,13 +120,37 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
     final items = snapshot.data ?? <String>[];
 
      return ListView.builder(
-      physics: const AlwaysScrollableScrollPhysics(), //Even if zero elements to update scroll
+      physics: const AlwaysScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: items.length,
       itemBuilder: (context, index){
       return Card(
         child:ListTile(
-          title: Text(items[index])
+          leading: Padding(
+            padding: const EdgeInsets.all(10),
+            child: SvgPicture.network(items[index], height: 50, width: 50,)
+          ),
+          title: Text(items[index]),
+          trailing: IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: () {
+              items.removeAt(index);
+              setState(() {
+                txtSkills.text = '';
+
+                for (var skill in items) {
+                  if (txtSkills.text != '') {
+                      txtSkills.text = '${txtSkills.text},$skill';
+                  } else {
+                      txtSkills.text = '$skill';
+                      listSkill = updateAndGetList(txtSkills.text);
+                  }
+                }
+
+                listSkill = updateAndGetList(txtSkills.text);
+              });
+            },
+          ),
         )
       ); // Your widget Here ; // Put your widget, such as container, decoratedBox, listTiles, button etc
       
