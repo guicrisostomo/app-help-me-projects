@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('projects').snapshots();
+final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('projects').orderBy('order').snapshots();
 
 // ignore: non_constant_identifier_names
 Widget ListViewProjects() {
