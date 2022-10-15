@@ -20,6 +20,7 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
   var txtLink = TextEditingController();
   var txtLinkImage = TextEditingController();
   var txtSkills = TextEditingController();
+  var txtOrder = TextEditingController();
   var flagPassArgumentsText = 0;
   List<String> listSkill = [];
 
@@ -59,6 +60,7 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
       txtDescricaoEN.text = p['descricaoEN'];
       txtLink.text = p['link'];
       txtLinkImage.text = p['linkImage'];
+      txtOrder.text = p['order'];
 
     }
   }
@@ -92,6 +94,8 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
               TextFieldGeneral('Link', txtLink, context),
               const SizedBox(height: 5,),
               TextFieldGeneral('Link image', txtLinkImage, context),
+              const SizedBox(height: 5,),
+              TextFieldGeneral('Ordem', txtOrder, context),
               const SizedBox(height: 5,),
               TextFieldSkills(rotulo: 'Skills', variavel: txtSkills, onChanged:(value) {
                 setState(() {
@@ -154,7 +158,7 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
   Future<void> updateProject() {
     return projects
       .doc(id)
-      .update({'nomePT': txtNomePT.text, 'nomeEN': txtNomeEN.text, 'descricaoPT': txtDescricaoPT.text, 'descricaoEN': txtDescricaoEN.text, 'link': txtLink.text, 'linkImage': txtLinkImage.text, 'skills': listSkill});
+      .update({'nomePT': txtNomePT.text, 'nomeEN': txtNomeEN.text, 'descricaoPT': txtDescricaoPT.text, 'descricaoEN': txtDescricaoEN.text, 'link': txtLink.text, 'linkImage': txtLinkImage.text, 'order': txtOrder.text, 'skills': listSkill});
   }
 
     return ElevatedButton(

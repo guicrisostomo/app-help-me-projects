@@ -21,6 +21,7 @@ class _ScreenAddProjectState extends State<ScreenAddProject> {
   var txtLink = TextEditingController();
   var txtLinkImage = TextEditingController();
   var txtSkills = TextEditingController();
+  var txtOrder = TextEditingController();
   List<String> listSkill = [];
 
   @override
@@ -55,6 +56,9 @@ class _ScreenAddProjectState extends State<ScreenAddProject> {
               const SizedBox(height: 5,),
               TextFieldGeneral('Link image', txtLinkImage, context),
               const SizedBox(height: 5,),
+              TextFieldGeneral('Ordem', txtOrder, context),
+              const SizedBox(height: 5,),
+
               TextFieldSkills(rotulo: 'Skills', variavel: txtSkills, onChanged:(value) {
                 setState(() {
                   txtSkills.text = value;
@@ -114,7 +118,7 @@ class _ScreenAddProjectState extends State<ScreenAddProject> {
 
     Future<void> AddProject() {
       return projects
-        .add({'nomePT': txtNomePT.text, 'nomeEN': txtNomeEN.text, 'descricaoPT': txtDescricaoPT.text, 'descricaoEN': txtDescricaoEN.text, 'link': txtLink.text, 'linkImage': txtLinkImage.text, 'order': '0', 'skills': listSkill});
+        .add({'nomePT': txtNomePT.text, 'nomeEN': txtNomeEN.text, 'descricaoPT': txtDescricaoPT.text, 'descricaoEN': txtDescricaoEN.text, 'link': txtLink.text, 'linkImage': txtLinkImage.text, 'order': txtOrder.text, 'skills': listSkill});
     }
 
     return ElevatedButton(
