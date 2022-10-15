@@ -154,9 +154,7 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
   Future<void> updateProject() {
     return projects
       .doc(id)
-      .update({'nomePT': txtNomePT.text, 'nomeEN': txtNomeEN.text, 'descricaoPT': txtDescricaoPT.text, 'descricaoEN': txtDescricaoEN.text, 'link': txtLink.text, 'linkImage': txtLinkImage.text, 'skills': listSkill})
-      .then((value) => print("User Updated"))
-      .catchError((error) => print("Failed to update user: $error"));
+      .update({'nomePT': txtNomePT.text, 'nomeEN': txtNomeEN.text, 'descricaoPT': txtDescricaoPT.text, 'descricaoEN': txtDescricaoEN.text, 'link': txtLink.text, 'linkImage': txtLinkImage.text, 'skills': listSkill});
   }
 
     return ElevatedButton(
