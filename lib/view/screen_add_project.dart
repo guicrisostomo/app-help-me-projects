@@ -1,4 +1,5 @@
 import 'package:app_help_me/model/textFieldSkills.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -99,11 +100,46 @@ class _ScreenAddProjectState extends State<ScreenAddProject> {
                 
               const SizedBox(height: 10,),
 
-              button('Adicionar', context, 'home', 'Save')
+              buttonAdd('Adicionar', context, 'home')
             ],
           ),
         ),
       ),
+    );
+  }
+  
+  buttonAdd(text, context, screen) {
+
+    CollectionReference projects = FirebaseFirestore.instance.collection('projects');
+
+    Future<void> AddProject() {
+      return projects
+        .add({'nomePT': txtNomePT.text, 'nomeEN': txtNomeEN.text, 'descricaoPT': txtDescricaoPT.text, 'descricaoEN': txtDescricaoEN.text, 'link': txtLink.text, 'linkImage': txtLinkImage.text, 'order': '0', 'skills': listSkill});
+    }
+
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(100, 50), 
+        backgroundColor: const Color.fromRGBO(50, 62, 64, 1),
+      ),
+      
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontSize: 24,
+        )
+      ),
+
+      //COMPORTAMENTO
+      onPressed: () {
+        AddProject();
+
+        Navigator.of(context).pop();
+        Navigator.pushNamed(
+          context,
+          screen,
+        );
+      },
     );
   }
 }
