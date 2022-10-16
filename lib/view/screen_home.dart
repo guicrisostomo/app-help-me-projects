@@ -13,6 +13,12 @@ class _ScreenHomeState extends State<ScreenHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Meus projetos'),
+        centerTitle: true,
+        backgroundColor: Colors.black,
+      ),
+
       body: SingleChildScrollView(
         child: Column(
           children: [
