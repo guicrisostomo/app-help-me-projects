@@ -22,6 +22,7 @@ class _ScreenHomeState extends State<ScreenHome> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(height: 10,),
             ListViewProjects(),
           ],
         )
