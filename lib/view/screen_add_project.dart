@@ -146,4 +146,21 @@ class _ScreenAddProjectState extends State<ScreenAddProject> {
       },
     );
   }
+
+  void searchOrder(orderTxt) async {
+    CollectionReference projects = FirebaseFirestore.instance.collection('projects');
+    var collection = FirebaseFirestore.instance.collection('projects').where('order', isGreaterThanOrEqualTo: int.parse(orderTxt));
+    var querySnapshot = await collection.get();
+    for (var queryDocumentSnapshot in querySnapshot.docs) {
+      Map<String, dynamic> data = queryDocumentSnapshot.data();
+
+      Future<void> updateProject() {
+        return projects
+          .doc(data['id'])
+          .update({'order': int.parse(txtOrder.text) + 1});
+      }
+
+      updateProject();
+    }
+  }
 }

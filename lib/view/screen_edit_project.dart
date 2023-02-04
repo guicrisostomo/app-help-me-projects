@@ -1,4 +1,3 @@
-import 'package:app_help_me/model/button.dart';
 import 'package:app_help_me/model/textField.dart';
 import 'package:app_help_me/model/textFieldSkills.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -67,7 +66,7 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
 
   @override
   Widget build(BuildContext context) {
-
+    
     passArgumentsText(context);
 
     var p = ModalRoute.of(context)!.settings.arguments as QueryDocumentSnapshot;
@@ -154,7 +153,9 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
   buttonUpdate(text, context, screen, id) {
 
   CollectionReference projects = FirebaseFirestore.instance.collection('projects');
-
+/*
+  searchOrder(txtOrder.text);
+  */
   Future<void> updateProject() {
     return projects
       .doc(id)
@@ -186,4 +187,31 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
       },
     );
   }
+/*
+  Future<void> searchOrder(orderTxt) async {
+    CollectionReference project = FirebaseFirestore.instance.collection('projects');
+
+    final projectsRef = FirebaseFirestore.instance.collection('project').withConverter<Projects>(
+      fromFirestore: (snapshot, _) => Projects.fromJson(snapshot.data()!),
+      toFirestore: (project, _) => project.toJson(),
+    );
+    List<QueryDocumentSnapshot<Projects>> projects = await projectsRef
+      .get()
+      .then((snapshot) => snapshot.docs);
+
+    
+      Future<void> updateProject(id) {
+        return project
+          .doc(id)
+          .update({'order': int.parse(txtOrder.text) + 1});
+      }
+
+      
+      for (var project in projects) {
+        print(project['id']);
+        break;
+        updateProject(project.id);
+      }
+  }
+  */
 }
