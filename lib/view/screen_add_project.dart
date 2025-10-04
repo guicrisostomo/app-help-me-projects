@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../model/button.dart';
 import '../model/textField.dart';
 
 class ScreenAddProject extends StatefulWidget {
@@ -35,9 +34,10 @@ class _ScreenAddProjectState extends State<ScreenAddProject> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Adicionar projeto'),
+        title: const Text('Adicionar projeto', style: TextStyle(color: Colors.white),),
         centerTitle: true,
         backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
       ),
 
       body: SingleChildScrollView(

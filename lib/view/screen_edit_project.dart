@@ -73,9 +73,10 @@ class _ScreenEditProjectState extends State<ScreenEditProject> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Editar projeto'),
+        title: const Text('Editar projeto', style: TextStyle(color: Colors.white),),
         centerTitle: true,
         backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
       ),
 
       body: SingleChildScrollView(

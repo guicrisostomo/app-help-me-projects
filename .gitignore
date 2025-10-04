@@ -44,4 +44,4 @@ app.*.map.json
 /android/app/release
 
 # Variaveis de ambiente
-.env*
+.env
